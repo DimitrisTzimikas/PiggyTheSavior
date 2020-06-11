@@ -15,13 +15,10 @@ export default ({onPressSave, onPressCancel, style}) => {
 
 const buttons = StyleSheet.create({
   container: {
+    position: 'absolute',
     flexDirection: 'row',
-    width: '100%',
-    height: 40,
-    bottom: 20,
     justifyContent: 'space-between',
-    alignItems: 'center',
-    elevation: 2,
-    backgroundColor: 'transparent',
+    alignSelf: 'center',
+    bottom: 20,
   },
 });

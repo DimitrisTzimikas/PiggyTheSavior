@@ -1,19 +1,32 @@
 /* Libraries */
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 /* Local Files */
-import {products} from '../navigations/screen_names.js';
 import Button from '../components/button';
 import Header from '../components/expenses_list/header.js';
 import Item from '../components/expenses_list/item.js';
+import Modal from '../components/modals/delete.js';
+import {products} from '../navigations/screen_names.js';
+import {removeExpense} from '../redux/ducks/expenses.js';
 
 export default ({navigation}) => {
+  const dispatch = useDispatch();
   const expenses = useSelector(state => state.expenses.expensesList);
+  const [showModal, setShowModal] = useState(false);
+  const [itemID, setItemID] = useState('');
 
-  const addExp = () => navigation.navigate(products, {edit: false, item: null});
-  const editExp = item => navigation.navigate(products, {edit: true, item});
-  const delExp = () => alert('delete');
+  const addItem = () =>
+    navigation.navigate(products, {edit: false, item: null});
+  const editItem = item => navigation.navigate(products, {edit: true, item});
+  const delItem = () => {
+    dispatch(removeExpense(itemID));
+    setShowModal(!showModal);
+  };
+  const toggleModal = id => {
+    setShowModal(!showModal);
+    setItemID(id);
+  };
 
   // useEffect(() => {
   //   setTimeout(addExp, 0);
@@ -30,13 +43,14 @@ export default ({navigation}) => {
         renderItem={({item}) => (
           <Item
             item={item}
-            onPress={() => editExp(item)}
-            onLongPress={delExp}
+            onPress={() => editItem(item)}
+            onLongPress={() => toggleModal(item.id)}
           />
         )}
         ListFooterComponent={<View style={home.listFooter} />}
       />
-      <Button style={home.button} text="+" onPress={addExp} />
+      <Button style={home.button} text="+" onPress={addItem} />
+      <Modal isVisible={showModal} toggle={toggleModal} del={delItem} />
     </View>
   );
 };

@@ -2,7 +2,6 @@
 import React from 'react';
 import {Text, TextInput, View, StyleSheet} from 'react-native';
 /* Local Files */
-import {euro} from '../../styles/signs.js';
 import {decimal} from '../../functions/decimal.js';
 
 export default ({
@@ -53,7 +52,7 @@ const inputs = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 5,
 
-    height: 40,
+    fontSize: 20,
     width: '90%',
 
     marginTop: 10,
@@ -88,7 +87,7 @@ const inputs = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 5,
-
+    fontSize: 15,
     height: 40,
     width: '30%',
     textAlign: 'center',
@@ -102,6 +101,7 @@ const inputs = StyleSheet.create({
     borderRadius: 5,
 
     height: 40,
+    fontSize: 15,
     width: '30%',
     textAlign: 'center',
     textAlignVertical: 'center',
