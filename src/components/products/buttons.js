@@ -19,7 +19,6 @@ const buttons = StyleSheet.create({
     width: '100%',
     height: 40,
     bottom: 20,
-    position: 'absolute',
     justifyContent: 'space-between',
     alignItems: 'center',
     elevation: 2,

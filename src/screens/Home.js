@@ -1,5 +1,5 @@
 /* Libraries */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 /* Local Files */
@@ -11,9 +11,13 @@ import Item from '../components/expenses_list/item.js';
 export default ({navigation}) => {
   const expenses = useSelector(state => state.expenses.expensesList);
 
-  const add = () => navigation.navigate(products, {edit: false});
-  const edit = item => navigation.navigate(products, {edit: true, item});
-  const del = () => alert('delete');
+  const addExp = () => navigation.navigate(products, {edit: false, item: null});
+  const editExp = item => navigation.navigate(products, {edit: true, item});
+  const delExp = () => alert('delete');
+
+  // useEffect(() => {
+  //   setTimeout(addExp, 0);
+  // });
 
   return (
     <View style={home.style}>
@@ -22,13 +26,17 @@ export default ({navigation}) => {
         data={expenses}
         keyExtractor={item => item.id}
         stickyHeaderIndices={[0]}
-        ListHeaderComponent={<Header />}
+        ListHeaderComponent={<Header length={expenses.length} />}
         renderItem={({item}) => (
-          <Item item={item} onPress={() => edit(item)} onLongPress={del} />
+          <Item
+            item={item}
+            onPress={() => editExp(item)}
+            onLongPress={delExp}
+          />
         )}
         ListFooterComponent={<View style={home.listFooter} />}
       />
-      <Button style={home.button} text="+" onPress={add} />
+      <Button style={home.button} text="+" onPress={addExp} />
     </View>
   );
 };

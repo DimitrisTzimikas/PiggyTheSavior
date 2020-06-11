@@ -1,4 +1,4 @@
-const list = [
+const expenses = [
   {
     id: '5614-6982-1484',
     title: 'Weakly',
@@ -34,4 +34,10 @@ const list = [
   },
 ];
 
-console.log(list);
+const products = [
+  {id: '5684-6222-1684', name: 'Coffee', cost: 1.4},
+  {id: '5684-6282-1684', name: 'Coffee', cost: 1.4},
+  {id: '5684-6212-1684', name: 'Coffee', cost: 1.4},
+];
+
+console.log(expenses, products);

@@ -1,43 +1,77 @@
 /* Libraries */
-import React from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet, FlatList, Keyboard} from 'react-native';
+import {useDispatch} from 'react-redux';
 /* Local Files */
 import {home} from '../navigations/screen_names.js';
 import Header from '../components/products/list/header.js';
 import Item from '../components/products/list/item.js';
 import Buttons from '../components/products/buttons.js';
 import TopInputs from '../components/products/top_inputs.js';
+import {createExpense, updateExpense} from '../redux/ducks/expenses.js';
 
 export default ({navigation, route}) => {
-  const save = () => navigation.navigate(home);
-  const cancel = () => navigation.navigate(home);
+  const dispatch = useDispatch();
+  const [expense, setExpense] = useState({});
+
+  useEffect(() => {
+    if (route.params.edit) {
+      setExpense(prev => ({...prev, ...route.params.item}));
+      return;
+    }
+
+    setExpense(prev => ({...prev, amount: '', productsList: []}));
+  }, [route.params.edit, route.params.item]);
+
+  const saveBtn = () => {
+    Keyboard.dismiss();
+    if (route.params.edit) {
+      dispatch(updateExpense(expense, route.params.item.id));
+      return;
+    }
+    dispatch(createExpense(expense));
+  };
+  const cancelBtn = () => navigation.navigate(home);
+  const changeTitle = text => setExpense(prev => ({...prev, title: text}));
+  const changeAmount = text => setExpense(prev => ({...prev, amount: text}));
+  const clearAmount = () => setExpense(prev => ({...prev, amount: ''}));
+  const findRemainder = () => {
+    const sum = expense.productsList.reduce(
+      (acc, item) => (acc += item.cost),
+      0,
+    );
+    setExpense(prev => ({...prev, remainder: expense.amount - sum}));
+  };
 
   return (
-    <View style={products.style}>
-      <TopInputs />
-      {/* <FlatList
-        style={products.list}
-        data={products}
+    <View style={product.container}>
+      <TopInputs
+        expense={expense}
+        changeTitle={changeTitle}
+        changeAmount={changeAmount}
+        clearAmount={clearAmount}
+        findRemainder={findRemainder}
+      />
+      <FlatList
+        style={product.list}
+        data={expense.productsList}
         keyExtractor={item => item.id}
         stickyHeaderIndices={[0]}
-        ListHeaderComponent={() => <Header />}
-        renderItem={({item}) => <Item item={item} />}
-        ListFooterComponent={() => <View style={products.footer} />}
-      /> */}
-      <Buttons onPressSave={save} onPressCancel={cancel} />
+        ListHeaderComponent={() => <Header onPress={() => alert('ok')} />}
+        renderItem={({item}) => (
+          <Item item={item} onPress={() => alert('ok')} />
+        )}
+        ListFooterComponent={() => <View style={product.footer} />}
+      />
+      <Buttons onPressSave={saveBtn} onPressCancel={cancelBtn} />
     </View>
   );
 };
 
-const products = StyleSheet.create({
-  style: {
+const product = StyleSheet.create({
+  container: {
     flex: 1,
   },
   list: {flex: 1},
-  button: {
-    position: 'absolute',
-    alignSelf: 'center',
-    bottom: 20,
-  },
   footer: {height: 80},
 });
