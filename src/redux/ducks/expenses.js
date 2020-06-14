@@ -71,7 +71,10 @@ const createProductHelper = (state, payload) => {
     if (expense.id === payload.expID) {
       return {
         ...expense,
-        productsList: [...expense.productsList, {id: payload.prdID}],
+        productsList: [
+          ...expense.productsList,
+          {id: payload.prdID, name: '', cost: ''},
+        ],
       };
     }
     return expense;
@@ -83,12 +86,22 @@ const createProductHelper = (state, payload) => {
 const deleteProductHelper = (state, payload) => {
   const deletedList = state.list.map(expense => {
     if (expense.id === payload.expID) {
-      const newProductsList = expense.productsList.filter(
-        product => product.id !== payload.prdID,
-      );
+      let productCost;
+      const newProductsList = expense.productsList.filter(product => {
+        if (product.id === payload.prdID) {
+          productCost = product.cost;
+          console.log('product.cost ', product.cost);
+        }
+
+        return product.id !== payload.prdID;
+      });
+      console.log(expense.remainder);
+      console.log(Number(productCost));
+      console.log(Number(expense.remainder) + Number(productCost));
       return {
         ...expense,
         productsList: [...newProductsList],
+        remainder: Number(expense.remainder) + Number(productCost),
       };
     }
     return expense;
@@ -157,7 +170,7 @@ const updateHelper = (state, payload) => {
         return {
           ...expense,
           productsList: [...newProductsList],
-          remainder: expense.budget - sum,
+          remainder: Number(expense.budget) - Number(sum),
         };
       }
     }

@@ -23,7 +23,7 @@ export default ({
     <View style={styles.style}>
       <View style={styles.viewText}>
         <Text style={styles.textNameBudget}>Name</Text>
-        <Text style={styles.textNameBudget}>budget</Text>
+        <Text style={styles.textNameBudget}>Cost</Text>
       </View>
       <View style={styles.viewText}>
         <TextInput

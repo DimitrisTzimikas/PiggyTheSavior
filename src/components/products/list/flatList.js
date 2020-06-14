@@ -5,17 +5,19 @@ import {FlatList, View} from 'react-native';
 import Header from '../../../components/products/list/header.js';
 import Item from '../../../components/products/list/item.js';
 
-export default ({style, data, toggleEdit, toggleDelete}) => (
+export default ({style, data, toggleProduct, toggleDelete}) => (
   <FlatList
     style={style.list}
     data={data}
     keyExtractor={item => item.id}
     stickyHeaderIndices={[0]}
-    ListHeaderComponent={() => <Header onPress={() => toggleEdit('', true)} />}
+    ListHeaderComponent={() => (
+      <Header onPress={() => toggleProduct('', true)} />
+    )}
     renderItem={({item}) => (
       <Item
         item={item}
-        onPress={() => toggleEdit(item.id, false)}
+        onPress={() => toggleProduct(item.id, false)}
         onLongPress={() => toggleDelete(item.id)}
       />
     )}

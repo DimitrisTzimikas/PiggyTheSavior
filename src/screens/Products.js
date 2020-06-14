@@ -44,8 +44,8 @@ export default ({navigation, route}) => {
     setShowProductModal(!showProductModal);
   };
   const toggleDeleteModal = id => {
-    setShowDeleteModal(!showDeleteModal);
     setProductID(id);
+    setShowDeleteModal(!showDeleteModal);
   };
   const delProduct = () => {
     dispatch(removeProduct(route.params.id, productID));
@@ -63,7 +63,7 @@ export default ({navigation, route}) => {
       <ProductsList
         style={product}
         data={expense.productsList}
-        toggleEdit={toggleProductModal}
+        toggleProduct={toggleProductModal}
         toggleDelete={toggleDeleteModal}
       />
       <Button style={product.button} text={'Back'} onPress={backButton} />
