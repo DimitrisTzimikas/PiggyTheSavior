@@ -22,8 +22,8 @@ export default ({item, onPress, onLongPress}) => (
         {item.title}
       </TextTicker>
     </View>
-    <Text style={list.amount}>
-      {decimal(item.amount)}
+    <Text style={list.budget}>
+      {decimal(item.budget)}
       {euro}
     </Text>
     <Text style={list.remainder}>
@@ -51,7 +51,7 @@ const list = StyleSheet.create({
     textAlignVertical: 'center',
     fontSize: 20,
   },
-  amount: {
+  budget: {
     textAlign: 'right',
     fontSize: 20,
     paddingLeft: 2,

@@ -4,13 +4,7 @@ import {Text, TextInput, View, StyleSheet} from 'react-native';
 /* Local Files */
 import {decimal} from '../../functions/decimal.js';
 
-export default ({
-  expense,
-  changeTitle,
-  changeAmount,
-  clearAmount,
-  findRemainder,
-}) => (
+export default ({expense, changeTitle, changeBudget, findRemainder}) => (
   <View style={inputs.container}>
     <TextInput
       style={inputs.title}
@@ -26,14 +20,13 @@ export default ({
 
     <View style={inputs.values}>
       <TextInput
-        style={inputs.amount}
+        style={inputs.budget}
         keyboardType={'numeric'}
         placeholder={'0'}
-        /* onFocus={clearAmount} */
         onSubmitEditing={findRemainder}
         onEndEditing={findRemainder}
-        value={expense.amount + ''}
-        onChangeText={changeAmount}
+        value={expense.budget + ''}
+        onChangeText={changeBudget}
       />
       <Text style={inputs.remainder}>{decimal(expense.remainder)}</Text>
     </View>
@@ -76,7 +69,7 @@ const inputs = StyleSheet.create({
     marginBottom: 10,
     marginTop: 10,
   },
-  amount: {
+  budget: {
     backgroundColor: 'white',
     justifyContent: 'center',
     color: 'black',

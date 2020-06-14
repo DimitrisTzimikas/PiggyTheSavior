@@ -1,118 +1,95 @@
 /* Libraries */
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, FlatList, Keyboard} from 'react-native';
-import {useDispatch} from 'react-redux';
+import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
+import React, {useState} from 'react';
+import {View, StyleSheet} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 /* Local Files */
-import Header from '../components/products/list/header.js';
-import Item from '../components/products/list/item.js';
-import Buttons from '../components/products/buttons.js';
+import Button from '../components/button.js';
 import TopInputs from '../components/products/top_inputs.js';
-import Modal from '../components/modals/product.js';
-import {home} from '../navigations/screen_names.js';
-import {createExpense, updateExpense} from '../redux/ducks/expenses.js';
+import ProductModal from '../components/modals/product.js';
+import DeleteModal from '../components/modals/delete.js';
+import ProductsList from '../components/products/list/flatList.js';
+import {
+  updateExpense,
+  createProduct,
+  removeProduct,
+} from '../redux/ducks/expenses.js';
 
 export default ({navigation, route}) => {
   const dispatch = useDispatch();
-  const [expense, setExpense] = useState({});
-  const [product, setProduct] = useState({id: '', name: '', cost: ''});
-  const [showModal, setShowModal] = useState(false);
-  const [itemID, setItemID] = useState('');
-  const [editProduct, setEditProduct] = useState(false);
+  const expense = useSelector(state =>
+    state.expenses.list.find(i => i.id === route.params.id),
+  );
+  const [showProductModal, setShowProductModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [productID, setProductID] = useState('');
 
-  useEffect(() => {
-    if (route.params.edit) {
-      setExpense(prev => ({...prev, ...route.params.item}));
-      return;
-    }
-
-    setExpense(prev => ({...prev, amount: '', productsList: []}));
-  }, [route.params.edit, route.params.item]);
-
-  const saveBtn = () => {
-    Keyboard.dismiss();
-    if (route.params.edit) {
-      dispatch(updateExpense(expense, route.params.item.id));
+  const changeTitle = text =>
+    dispatch(updateExpense('title', text, route.params.id));
+  const changeBudget = text =>
+    dispatch(updateExpense('budget', text, route.params.id));
+  const changeProductName = text =>
+    dispatch(updateExpense('name', text, route.params.id, productID));
+  const changeProductCost = text =>
+    dispatch(updateExpense('cost', text, route.params.id, productID));
+  const toggleProductModal = (id, createProductItem) => {
+    if (createProductItem) {
+      const prdID = uuidv4();
+      dispatch(createProduct(route.params.id, prdID));
+      setProductID(prdID);
     } else {
-      dispatch(createExpense(expense));
+      setProductID(id);
     }
-    navigation.navigate(home);
+    setShowProductModal(!showProductModal);
   };
-  const cancelBtn = () => navigation.navigate(home);
-  const changeTitle = text => setExpense(prev => ({...prev, title: text}));
-  const changeAmount = text => setExpense(prev => ({...prev, amount: text}));
-  const clearAmount = () => setExpense(prev => ({...prev, amount: ''}));
-  const findRemainder = () => {
-    const sum = expense.productsList.reduce(
-      (acc, item) => (acc += Number(item.cost)),
-      0,
-    );
-    setExpense(prev => ({...prev, remainder: expense.amount - sum}));
+  const toggleDeleteModal = id => {
+    setShowDeleteModal(!showDeleteModal);
+    setProductID(id);
   };
-  const toggleModal = id => {
-    if (typeof id === typeof '') {
-      console.log(typeof id);
-
-      return;
-    }
-
-    setShowModal(!showModal);
-    setProduct(prev => ({...prev, name: '', cost: ''}));
+  const delProduct = () => {
+    dispatch(removeProduct(route.params.id, productID));
+    setShowDeleteModal(!showDeleteModal);
   };
-  const changeProduct = (key, value) =>
-    setProduct(prev => ({...prev, [key]: value}));
-  const saveProduct = () => {
-    if (editProduct) {
-    } else {
-      setProduct(prev => ({...prev, id: uuidv4()}));
-
-      if (route.params.edit) {
-        setExpense(prev => ({
-          ...prev,
-          productsList: [...prev.productsList, product],
-        }));
-        findRemainder();
-        dispatch(updateExpense(expense));
-      } else {
-      }
-    }
-    toggleModal();
-  };
+  const backButton = () => navigation.popToTop();
 
   return (
-    <View style={productS.container}>
+    <View style={product.container}>
       <TopInputs
         expense={expense}
         changeTitle={changeTitle}
-        changeAmount={changeAmount}
-        clearAmount={clearAmount}
-        findRemainder={findRemainder}
+        changeBudget={changeBudget}
       />
-      <FlatList
-        style={productS.list}
+      <ProductsList
+        style={product}
         data={expense.productsList}
-        keyExtractor={item => item.id}
-        stickyHeaderIndices={[0]}
-        ListHeaderComponent={() => <Header onPress={toggleModal} />}
-        renderItem={({item}) => (
-          <Item item={item} onPress={() => toggleModal(item.id)} />
-        )}
-        ListFooterComponent={() => <View style={productS.footer} />}
+        toggleEdit={toggleProductModal}
+        toggleDelete={toggleDeleteModal}
       />
-      <Buttons onPressSave={saveBtn} onPressCancel={cancelBtn} />
-      <Modal
-        isVisible={showModal}
-        toggle={toggleModal}
-        product={product}
-        changeProduct={changeProduct}
-        saveProduct={saveProduct}
+      <Button style={product.button} text={'Back'} onPress={backButton} />
+      <ProductModal
+        isVisible={showProductModal}
+        toggle={toggleProductModal}
+        product={expense.productsList.find(i => i.id === productID) || ''}
+        changeProductName={changeProductName}
+        changeProductCost={changeProductCost}
+      />
+      <DeleteModal
+        isVisible={showDeleteModal}
+        toggle={toggleDeleteModal}
+        del={delProduct}
       />
     </View>
   );
 };
 
-const productS = StyleSheet.create({
+const product = StyleSheet.create({
   container: {flex: 1},
   list: {flex: 1},
   footer: {height: 80},
+  button: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 20,
+  },
 });

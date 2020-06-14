@@ -6,21 +6,25 @@ import Modal from 'react-native-modal';
 import Button from '../../components/button.js';
 import {modalButton} from '../../styles/colors.js';
 import {euro} from '../../styles/signs.js';
-
-export default ({isVisible, toggle, product, changeProduct, saveProduct}) => (
+export default ({
+  isVisible,
+  toggle,
+  product,
+  changeProductName,
+  changeProductCost,
+}) => (
   <Modal
     isVisible={isVisible}
-    onBackdropPress={toggle}
+    onBackdropPress={() => toggle('', false)}
     backdropColor={modalButton}
     backdropOpacity={0.8}
     hideModalContentWhileAnimating={true}
     useNativeDriver={true}>
     <View style={styles.style}>
       <View style={styles.viewText}>
-        <Text style={styles.textNameAmount}>Name</Text>
-        <Text style={styles.textNameAmount}>Amount</Text>
+        <Text style={styles.textNameBudget}>Name</Text>
+        <Text style={styles.textNameBudget}>budget</Text>
       </View>
-
       <View style={styles.viewText}>
         <TextInput
           style={styles.textInputTitle}
@@ -29,9 +33,7 @@ export default ({isVisible, toggle, product, changeProduct, saveProduct}) => (
           multiline={false}
           maxLength={14}
           value={product.name}
-          onChangeText={name => {
-            changeProduct('name', name);
-          }}
+          onChangeText={changeProductName}
         />
 
         <TextInput
@@ -39,15 +41,12 @@ export default ({isVisible, toggle, product, changeProduct, saveProduct}) => (
           placeholder={euro}
           keyboardType={'numeric'}
           value={product.cost}
-          onChangeText={cost => {
-            changeProduct('cost', cost);
-          }}
+          onChangeText={changeProductCost}
         />
       </View>
 
       <View style={styles.viewButton}>
-        <Button text={'Save'} onPress={saveProduct} />
-        <Button text={'Cancel'} onPress={toggle} />
+        <Button text={'Back'} onPress={() => toggle('', false)} />
       </View>
     </View>
   </Modal>
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
   },
-  textNameAmount: {
+  textNameBudget: {
     fontSize: 20,
     textAlign: 'center',
   },
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
   viewButton: {
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     elevation: 2,
     backgroundColor: 'transparent',
