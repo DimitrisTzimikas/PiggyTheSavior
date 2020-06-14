@@ -34,6 +34,7 @@ export default ({
           maxLength={14}
           value={product.name}
           onChangeText={changeProductName}
+          onSubmitEditing={() => toggle('', false)}
         />
 
         <TextInput
@@ -42,6 +43,7 @@ export default ({
           keyboardType={'numeric'}
           value={product.cost}
           onChangeText={changeProductCost}
+          onSubmitEditing={() => toggle('', false)}
         />
       </View>
 

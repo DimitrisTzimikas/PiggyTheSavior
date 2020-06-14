@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Piggy the Savior</string>
+    <string name="splash_screen_image">piggy</string>
+    <string name="text_view">Piggy the Savior</string>
 </resources>
