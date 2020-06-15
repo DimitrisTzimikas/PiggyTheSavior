@@ -1,5 +1,5 @@
 /* Libraries */
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import {SwipeListView} from 'react-native-swipe-list-view';
 /* Local Files */
@@ -14,36 +14,34 @@ export default ({
   toggleDeleteModal,
   updateArray,
   deleteMultiple,
-}) => {
-  const [showCheckBox, setShowCheckbox] = useState(false);
-
-  return (
-    <SwipeListView
-      style={style.list}
-      data={data}
-      keyExtractor={item => item.id}
-      stickyHeaderIndices={[0]}
-      ListHeaderComponent={() => (
-        <Header onPress={() => toggleProduct('', true)} />
-      )}
-      renderItem={({item}) => (
-        <Item
-          item={item}
-          onPress={() => toggleProduct(item.id, false)}
-          showCheckBox={showCheckBox}
-          updateArray={updateArray}
-        />
-      )}
-      renderHiddenItem={({item}) => (
-        <HiddenItem
-          deleteItem={() => toggleDeleteModal(item.id)}
-          selectMultiple={() => setShowCheckbox(!showCheckBox)}
-          deleteMultiple={deleteMultiple}
-        />
-      )}
-      ListFooterComponent={() => <View style={style.footer} />}
-      leftOpenValue={202}
-      rightOpenValue={-82}
-    />
-  );
-};
+  showCheckBox,
+  toggleCheckBox,
+}) => (
+  <SwipeListView
+    style={style.list}
+    data={data}
+    keyExtractor={item => item.id}
+    stickyHeaderIndices={[0]}
+    ListHeaderComponent={() => (
+      <Header onPress={() => toggleProduct('', true)} />
+    )}
+    renderItem={({item}) => (
+      <Item
+        item={item}
+        onPress={() => toggleProduct(item.id, false)}
+        showCheckBox={showCheckBox}
+        updateArray={updateArray}
+      />
+    )}
+    renderHiddenItem={({item}) => (
+      <HiddenItem
+        deleteItem={() => toggleDeleteModal(item.id)}
+        selectMultiple={toggleCheckBox}
+        deleteMultiple={deleteMultiple}
+      />
+    )}
+    ListFooterComponent={() => <View style={style.footer} />}
+    leftOpenValue={202}
+    rightOpenValue={-82}
+  />
+);

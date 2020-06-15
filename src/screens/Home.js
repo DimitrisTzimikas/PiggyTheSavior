@@ -17,6 +17,7 @@ export default ({navigation}) => {
   const [showModal, setShowModal] = useState(false);
   const [itemID, setItemID] = useState('');
   const [array, setArray] = useState([]);
+  const [showCheckBox, setShowCheckbox] = useState(false);
 
   const createItem = () => {
     const id = uuidv4();
@@ -29,6 +30,7 @@ export default ({navigation}) => {
       array.forEach(id => {
         dispatch(removeExpense(id));
       });
+      toggleCheckBox();
     } else {
       dispatch(removeExpense(itemID));
     }
@@ -50,6 +52,7 @@ export default ({navigation}) => {
   const deleteMultiple = () => {
     toggleDeleteModal('multiple');
   };
+  const toggleCheckBox = () => setShowCheckbox(!showCheckBox);
 
   return (
     <View style={home.style}>
@@ -60,6 +63,8 @@ export default ({navigation}) => {
         toggleDeleteModal={toggleDeleteModal}
         updateArray={updateArray}
         deleteMultiple={deleteMultiple}
+        showCheckBox={showCheckBox}
+        toggleCheckBox={toggleCheckBox}
       />
       <Button style={home.button} text="+" onPress={createItem} />
       <Modal

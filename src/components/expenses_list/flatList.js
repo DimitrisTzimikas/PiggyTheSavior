@@ -1,5 +1,5 @@
 /* Libraries */
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import {SwipeListView} from 'react-native-swipe-list-view';
 /* Local Files */
@@ -14,34 +14,32 @@ export default ({
   toggleDeleteModal,
   updateArray,
   deleteMultiple,
-}) => {
-  const [showCheckBox, setShowCheckbox] = useState(false);
-
-  return (
-    <SwipeListView
-      style={style.listStyle}
-      data={data}
-      keyExtractor={item => item.id}
-      stickyHeaderIndices={[0]}
-      ListHeaderComponent={<Header length={data.length} />}
-      renderItem={({item}) => (
-        <Item
-          item={item}
-          onPress={() => editItem(item.id)}
-          showCheckBox={showCheckBox}
-          updateArray={updateArray}
-        />
-      )}
-      renderHiddenItem={({item}) => (
-        <HiddenItem
-          deleteItem={() => toggleDeleteModal(item.id)}
-          selectMultiple={() => setShowCheckbox(!showCheckBox)}
-          deleteMultiple={deleteMultiple}
-        />
-      )}
-      ListFooterComponent={<View style={style.listFooter} />}
-      leftOpenValue={202}
-      rightOpenValue={-82}
-    />
-  );
-};
+  showCheckBox,
+  toggleCheckBox,
+}) => (
+  <SwipeListView
+    style={style.listStyle}
+    data={data}
+    keyExtractor={item => item.id}
+    stickyHeaderIndices={[0]}
+    ListHeaderComponent={<Header length={data.length} />}
+    renderItem={({item}) => (
+      <Item
+        item={item}
+        onPress={() => editItem(item.id)}
+        showCheckBox={showCheckBox}
+        updateArray={updateArray}
+      />
+    )}
+    renderHiddenItem={({item}) => (
+      <HiddenItem
+        deleteItem={() => toggleDeleteModal(item.id)}
+        selectMultiple={toggleCheckBox}
+        deleteMultiple={deleteMultiple}
+      />
+    )}
+    ListFooterComponent={<View style={style.listFooter} />}
+    leftOpenValue={202}
+    rightOpenValue={-82}
+  />
+);

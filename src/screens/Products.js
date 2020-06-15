@@ -25,6 +25,7 @@ export default ({navigation, route}) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [productID, setProductID] = useState('');
   const [array, setArray] = useState([]);
+  const [showCheckBox, setShowCheckbox] = useState(false);
 
   const changeTitle = text =>
     dispatch(updateExpense('title', text, route.params.id));
@@ -55,6 +56,7 @@ export default ({navigation, route}) => {
       array.forEach(id => {
         dispatch(removeProduct(route.params.id, id));
       });
+      toggleCheckBox();
     } else {
       dispatch(removeProduct(route.params.id, productID));
     }
@@ -71,6 +73,7 @@ export default ({navigation, route}) => {
     toggleDeleteModal('multiple');
   };
   const backButton = () => navigation.popToTop();
+  const toggleCheckBox = () => setShowCheckbox(!showCheckBox);
 
   return (
     <View style={product.container}>
@@ -86,6 +89,8 @@ export default ({navigation, route}) => {
         toggleDeleteModal={toggleDeleteModal}
         updateArray={updateArray}
         deleteMultiple={deleteMultiple}
+        showCheckBox={showCheckBox}
+        toggleCheckBox={toggleCheckBox}
       />
       <Button style={product.button} text={'Back'} onPress={backButton} />
       <ProductModal
