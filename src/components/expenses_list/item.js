@@ -22,18 +22,6 @@ export default ({item, onPress, showCheckBox, updateArray}) => {
           style={list.checkBox}
           value={toggleCheckBox}
           onValueChange={onValueChange}
-          onAnimationDidStop={() => console.log('onAnimationDidStopEvent')}
-          lineWidth={2}
-          hideBox={false}
-          boxType={'circle'}
-          tintColor={'#9E663C'}
-          onCheckColor={'#6F763F'}
-          onFillColor={'#4DABEC'}
-          onTintColor={'#F4DCF8'}
-          animationDuration={0.5}
-          disabled={false}
-          onAnimationType={'bounce'}
-          offAnimationType={'stroke'}
         />
       ) : null}
       <View style={list.view}>

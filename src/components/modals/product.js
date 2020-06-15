@@ -31,7 +31,6 @@ export default ({
           numberOfLines={1}
           placeholder={'Product'}
           multiline={false}
-          maxLength={14}
           value={product.name}
           onChangeText={changeProductName}
           onSubmitEditing={() => toggle('', false)}

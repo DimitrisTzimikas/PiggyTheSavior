@@ -1,6 +1,7 @@
 /* Libraries */
 import React, {useState} from 'react';
-import {Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {Text, TouchableOpacity, StyleSheet, View} from 'react-native';
+import TextTicker from 'react-native-text-ticker';
 import CheckBox from '@react-native-community/checkbox';
 /* Local Files */
 import {euro} from '../../../styles/signs.js';
@@ -25,9 +26,19 @@ export default ({item, onPress, showCheckBox, updateArray}) => {
           onValueChange={onValueChange}
         />
       ) : null}
-      <Text style={list.text} numberOfLines={1}>
+      {/* <Text style={list.text} numberOfLines={1}>
         {item.name}
-      </Text>
+      </Text> */}
+      <View style={list.view}>
+        <TextTicker
+          style={list.text}
+          duration={4000}
+          loop
+          repeatSpacer={50}
+          marqueeDelay={3000}>
+          {item.name}
+        </TextTicker>
+      </View>
       <Text style={list.cost}>
         {item.cost} {euro}
       </Text>
@@ -38,22 +49,29 @@ export default ({item, onPress, showCheckBox, updateArray}) => {
 const list = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    alignItems: 'center',
     backgroundColor: second,
     borderRadius: 5,
     margin: 6,
     height: 50,
   },
-  text: {
+  view: {
     flex: 1,
-    alignSelf: 'flex-start',
     paddingLeft: 10,
+    paddingRight: 10,
+  },
+  text: {
+    textAlignVertical: 'center',
     fontSize: 20,
   },
   cost: {
-    flex: 0.4,
+    flex: 0.28,
     textAlign: 'right',
     fontSize: 20,
+    paddingRight: 10,
+  },
+  checkBox: {
+    height: 50,
+    width: 50,
   },
 });
