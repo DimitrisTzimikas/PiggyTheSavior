@@ -6,7 +6,184 @@ export const CREATE_PRD = 'CREATE_PRODUCT';
 export const REMOVE_PRD = 'REMOVE_PRODUCT';
 
 const initialState = {
-  list: [],
+  list: [
+    {
+      id: 'aswrwetddf',
+      title: 'Weakly',
+      budget: '100',
+      remainder: 90,
+      productsList: [
+        {id: 'asdftgb', name: 'Gums', cost: '2'},
+        {id: 'asd1234f', name: 'Coffee', cost: '2'},
+        {id: '1asdf', name: 'Launch', cost: '6'},
+      ],
+    },
+    {
+      id: 'a2133456345trgfdg421fsdf',
+      title: 'Weakly',
+      budget: '50',
+      remainder: 41,
+      productsList: [
+        {id: 'asdjuikf', name: 'Gums', cost: '1'},
+        {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
+        {id: 'asqwerfadf', name: 'Launch', cost: '6'},
+      ],
+    },
+    // {
+    //   id: 'adfsgw5t546546sdf',
+    //   title: 'Weakly',
+    //   budget: '100',
+    //   remainder: 90,
+    //   productsList: [
+    //     {id: 'asdftgb', name: 'Gums', cost: '2'},
+    //     {id: 'asd1234f', name: 'Coffee', cost: '2'},
+    //     {id: '1asdf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'a21323452346trdfg421fsdf',
+    //   title: 'Weakly',
+    //   budget: '50',
+    //   remainder: 41,
+    //   productsList: [
+    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
+    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
+    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'assdfvgrtv43689df',
+    //   title: 'Weakly',
+    //   budget: '100',
+    //   remainder: 90,
+    //   productsList: [
+    //     {id: 'asdftgb', name: 'Gums', cost: '2'},
+    //     {id: 'asd1234f', name: 'Coffee', cost: '2'},
+    //     {id: '1asdf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'a213421sdfg sdfvterdgvfsdf',
+    //   title: 'Weakly',
+    //   budget: '50',
+    //   remainder: 41,
+    //   productsList: [
+    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
+    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
+    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'asdertyv456465v54tvefdgscsdfgf',
+    //   title: 'Weakly',
+    //   budget: '100',
+    //   remainder: 90,
+    //   productsList: [
+    //     {id: 'asdftgb', name: 'Gums', cost: '2'},
+    //     {id: 'asd1234f', name: 'Coffee', cost: '2'},
+    //     {id: '1asdf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'a21342ertyverty1fsdf',
+    //   title: 'Weakly',
+    //   budget: '50',
+    //   remainder: 41,
+    //   productsList: [
+    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
+    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
+    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'ajjgfhjtvysdf',
+    //   title: 'Weakly',
+    //   budget: '100',
+    //   remainder: 90,
+    //   productsList: [
+    //     {id: 'asdftgb', name: 'Gums', cost: '2'},
+    //     {id: 'asd1234f', name: 'Coffee', cost: '2'},
+    //     {id: '1asdf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'a21dfgfdffggg3421fsdf',
+    //   title: 'Weakly',
+    //   budget: '50',
+    //   remainder: 41,
+    //   productsList: [
+    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
+    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
+    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'a342rwerrrrsdf',
+    //   title: 'Weakly',
+    //   budget: '100',
+    //   remainder: 90,
+    //   productsList: [
+    //     {id: 'asdftgb', name: 'Gums', cost: '2'},
+    //     {id: 'asd1234f', name: 'Coffee', cost: '2'},
+    //     {id: '1asdf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'a2134erwtcetc4321fsdf',
+    //   title: 'Weakly',
+    //   budget: '50',
+    //   remainder: 41,
+    //   productsList: [
+    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
+    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
+    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'asdfgcewrtc43df',
+    //   title: 'Weakly',
+    //   budget: '100',
+    //   remainder: 90,
+    //   productsList: [
+    //     {id: 'asdftgb', name: 'Gums', cost: '2'},
+    //     {id: 'asd1234f', name: 'Coffee', cost: '2'},
+    //     {id: '1asdf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'a213421fsdf',
+    //   title: 'Weakly',
+    //   budget: '50',
+    //   remainder: 41,
+    //   productsList: [
+    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
+    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
+    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'asdfc234r234cr',
+    //   title: 'Weakly',
+    //   budget: '100',
+    //   remainder: 90,
+    //   productsList: [
+    //     {id: 'asd234cr342crftgb', name: 'Gums', cost: '2'},
+    //     {id: 'asd12c234r34f', name: 'Coffee', cost: '2'},
+    //     {id: '1a23c4r423rcsdf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+    // {
+    //   id: 'a213421sdfvr43rc34fsdf',
+    //   title: 'Weakly',
+    //   budget: '50',
+    //   remainder: 41,
+    //   productsList: [
+    //     {id: 'sdfvasdjuikf', name: 'Gums', cost: '1'},
+    //     {id: 'aw45tfsdsdfvf', name: 'Coffee', cost: '2'},
+    //     {id: 'asqwevfdsrfadf', name: 'Launch', cost: '6'},
+    //   ],
+    // },
+  ],
 };
 
 /*  Reducers */

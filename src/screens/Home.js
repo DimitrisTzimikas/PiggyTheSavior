@@ -16,34 +16,57 @@ export default ({navigation}) => {
   const expenses = useSelector(state => state.expenses.list);
   const [showModal, setShowModal] = useState(false);
   const [itemID, setItemID] = useState('');
+  const [array, setArray] = useState([]);
 
   const createItem = () => {
     const id = uuidv4();
     dispatch(createExpense(id));
     navigation.navigate(products, {id});
   };
-  const editItem = id => {
-    navigation.navigate(products, {id});
-  };
+  const editItem = id => navigation.navigate(products, {id});
   const delItem = () => {
-    dispatch(removeExpense(itemID));
+    if (itemID === 'multiple') {
+      array.forEach(id => {
+        dispatch(removeExpense(id));
+      });
+    } else {
+      dispatch(removeExpense(itemID));
+    }
     setShowModal(!showModal);
   };
-  const toggleModal = id => {
-    setItemID(id);
+  const toggleDeleteModal = id => {
+    if (typeof id === 'string') {
+      setItemID(id);
+    }
     setShowModal(!showModal);
+  };
+  const updateArray = (id, add) => {
+    if (add) {
+      setArray([...array, id]);
+    } else {
+      setArray([...array.filter(i => i !== id)]);
+    }
+  };
+  const deleteMultiple = () => {
+    toggleDeleteModal('multiple');
   };
 
   return (
     <View style={home.style}>
       <ExpensesList
-        data={expenses}
         style={home}
-        edit={editItem}
-        toggle={toggleModal}
+        data={expenses}
+        editItem={editItem}
+        toggleDeleteModal={toggleDeleteModal}
+        updateArray={updateArray}
+        deleteMultiple={deleteMultiple}
       />
       <Button style={home.button} text="+" onPress={createItem} />
-      <Modal isVisible={showModal} toggle={toggleModal} del={delItem} />
+      <Modal
+        isVisible={showModal}
+        toggleDeleteModal={toggleDeleteModal}
+        delItem={delItem}
+      />
     </View>
   );
 };

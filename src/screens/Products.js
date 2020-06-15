@@ -24,6 +24,7 @@ export default ({navigation, route}) => {
   const [showProductModal, setShowProductModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [productID, setProductID] = useState('');
+  const [array, setArray] = useState([]);
 
   const changeTitle = text =>
     dispatch(updateExpense('title', text, route.params.id));
@@ -44,12 +45,30 @@ export default ({navigation, route}) => {
     setShowProductModal(!showProductModal);
   };
   const toggleDeleteModal = id => {
-    setProductID(id);
+    if (typeof id === 'string') {
+      setProductID(id);
+    }
     setShowDeleteModal(!showDeleteModal);
   };
   const delProduct = () => {
-    dispatch(removeProduct(route.params.id, productID));
+    if (productID === 'multiple') {
+      array.forEach(id => {
+        dispatch(removeProduct(route.params.id, id));
+      });
+    } else {
+      dispatch(removeProduct(route.params.id, productID));
+    }
     setShowDeleteModal(!showDeleteModal);
+  };
+  const updateArray = (id, add) => {
+    if (add) {
+      setArray([...array, id]);
+    } else {
+      setArray([...array.filter(i => i !== id)]);
+    }
+  };
+  const deleteMultiple = () => {
+    toggleDeleteModal('multiple');
   };
   const backButton = () => navigation.popToTop();
 
@@ -64,7 +83,9 @@ export default ({navigation, route}) => {
         style={product}
         data={expense.productsList}
         toggleProduct={toggleProductModal}
-        toggleDelete={toggleDeleteModal}
+        toggleDeleteModal={toggleDeleteModal}
+        updateArray={updateArray}
+        deleteMultiple={deleteMultiple}
       />
       <Button style={product.button} text={'Back'} onPress={backButton} />
       <ProductModal
@@ -76,8 +97,8 @@ export default ({navigation, route}) => {
       />
       <DeleteModal
         isVisible={showDeleteModal}
-        toggle={toggleDeleteModal}
-        del={delProduct}
+        toggleDeleteModal={toggleDeleteModal}
+        delItem={delProduct}
       />
     </View>
   );

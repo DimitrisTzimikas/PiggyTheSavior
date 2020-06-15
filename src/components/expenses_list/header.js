@@ -1,6 +1,7 @@
 /* Libraries */
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import {main} from '../../styles/colors.js';
 
 export default ({length}) => (
   <>
@@ -18,7 +19,7 @@ export default ({length}) => (
 
 const list = StyleSheet.create({
   header: {
-    backgroundColor: '#efa2cf',
+    backgroundColor: main,
     paddingHorizontal: 20,
     paddingVertical: 10,
     elevation: 5,

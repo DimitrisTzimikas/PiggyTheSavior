@@ -6,17 +6,17 @@ import Modal from 'react-native-modal';
 import Button from '../button.js';
 import {modalButton} from '../../styles/colors.js';
 
-export default ({isVisible, toggle, del}) => (
+export default ({isVisible, toggleDeleteModal, delItem}) => (
   <Modal
     isVisible={isVisible}
-    onBackdropPress={toggle}
+    onBackdropPress={toggleDeleteModal}
     backdropColor={modalButton}
     backdropOpacity={0.8}
     hideModalContentWhileAnimating={true}
     useNativeDriver={true}>
     <View style={modal.style}>
       <Text style={modal.text}>{'Are you sure you want to delete item?'}</Text>
-      <Button text={'delete'} onPress={del} />
+      <Button text={'delete'} onPress={delItem} />
     </View>
   </Modal>
 );
