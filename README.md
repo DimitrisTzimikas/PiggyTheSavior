@@ -4,7 +4,7 @@
 
 This is an application that holds your expenses. You can create categories and in every one put your products expenses
 
-![Piggy the Savior](https://raw.githubusercontent.com/DimitrisTzimikas/PiggyTheSavior/master/src/assets/piggy.gif){:height="640px" width="360px"}
+<img src="https://raw.githubusercontent.com/DimitrisTzimikas/PiggyTheSavior/master/src/assets/piggy.gif" width="320" height="640">
 
 ## Usage
 
