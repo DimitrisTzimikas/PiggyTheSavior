@@ -8,7 +8,7 @@ import SplashScreen from 'react-native-splash-screen';
 import {store, persistor} from './redux/store.js';
 import Navigations from './navigations/index.js';
 
-const Root = () => {
+export default () => {
   useEffect(() => {
     SplashScreen.hide();
   });
@@ -21,5 +21,3 @@ const Root = () => {
     </Provider>
   );
 };
-
-export default Root;

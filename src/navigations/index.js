@@ -7,11 +7,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import StackNavigator from './Stack.js';
 import {barStyle, statusBar} from '../styles/colors.js';
 
-const Navigations = () => (
+export default () => (
   <NavigationContainer>
     <StatusBar backgroundColor={statusBar} barStyle={barStyle} />
     <StackNavigator />
   </NavigationContainer>
 );
-
-export default Navigations;

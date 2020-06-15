@@ -11,7 +11,7 @@ import {home, products} from '../navigations/screen_names.js';
 
 const Stack = createStackNavigator();
 
-const StackNavigator = () => (
+export default () => (
   <Stack.Navigator
     initialRouteName={home}
     screenOptions={{
@@ -25,5 +25,3 @@ const StackNavigator = () => (
     <Stack.Screen name={products} component={ProductsScreen} />
   </Stack.Navigator>
 );
-
-export default StackNavigator;

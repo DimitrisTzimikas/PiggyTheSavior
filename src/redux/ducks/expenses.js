@@ -90,14 +90,11 @@ const deleteProductHelper = (state, payload) => {
       const newProductsList = expense.productsList.filter(product => {
         if (product.id === payload.prdID) {
           productCost = product.cost;
-          console.log('product.cost ', product.cost);
         }
 
         return product.id !== payload.prdID;
       });
-      console.log(expense.remainder);
-      console.log(Number(productCost));
-      console.log(Number(expense.remainder) + Number(productCost));
+
       return {
         ...expense,
         productsList: [...newProductsList],

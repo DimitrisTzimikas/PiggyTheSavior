@@ -5,7 +5,7 @@ import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 /* Local Files */
-import Button from '../components/button';
+import Button from '../components/button.js';
 import ExpensesList from '../components/expenses_list/flatList.js';
 import Modal from '../components/modals/delete.js';
 import {products} from '../navigations/screen_names.js';
