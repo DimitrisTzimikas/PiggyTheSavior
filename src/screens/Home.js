@@ -9,68 +9,74 @@ import Button from '../components/button.js';
 import ExpensesList from '../components/expenses_list/flatList.js';
 import Modal from '../components/modals/delete.js';
 import {products} from '../navigations/screen_names.js';
-import {createExpense, removeExpense} from '../redux/ducks/expenses.js';
+import {deleteButton} from '../styles/colors.js';
+import {
+  createExpense,
+  removeExpense,
+  showExpensesCheckboxes,
+  isExpenseSelected,
+  selectDeselectAll,
+} from '../redux/ducks/expenses.js';
 
 export default ({navigation}) => {
   const dispatch = useDispatch();
   const expenses = useSelector(state => state.expenses.list);
+  const showExpensesCheckBox = useSelector(
+    state => state.expenses.showExpensesCheckBox,
+  );
+  const isSelectAll = useSelector(
+    state => state.expenses.toggleExpensesSelectAllButton,
+  );
   const [showModal, setShowModal] = useState(false);
-  const [itemID, setItemID] = useState('');
-  const [array, setArray] = useState([]);
-  const [showCheckBox, setShowCheckbox] = useState(false);
 
-  const createItem = () => {
+  const goToCreatePage = () => {
     const id = uuidv4();
     dispatch(createExpense(id));
     navigation.navigate(products, {id});
   };
-  const editItem = id => navigation.navigate(products, {id});
-  const delItem = () => {
-    if (itemID === 'multiple') {
-      array.forEach(id => {
-        dispatch(removeExpense(id));
-      });
-      toggleCheckBox();
-    } else {
-      dispatch(removeExpense(itemID));
-    }
+  const goToEditPage = id => navigation.navigate(products, {id});
+  const deleteExpenses = () => {
+    dispatch(removeExpense());
     setShowModal(!showModal);
   };
-  const toggleDeleteModal = id => {
-    if (typeof id === 'string') {
-      setItemID(id);
-    }
-    setShowModal(!showModal);
-  };
-  const updateArray = (id, add) => {
-    if (add) {
-      setArray([...array, id]);
-    } else {
-      setArray([...array.filter(i => i !== id)]);
-    }
-  };
-  const deleteMultiple = () => {
-    toggleDeleteModal('multiple');
-  };
-  const toggleCheckBox = () => setShowCheckbox(!showCheckBox);
+  const toggleDeleteModal = () => setShowModal(!showModal);
+  const toggleCheckBox = expenseID =>
+    dispatch(showExpensesCheckboxes(expenseID));
+  const toggleExpenseCheckbox = expenseID =>
+    dispatch(isExpenseSelected(expenseID));
+  const toggleSelectAll = () => dispatch(selectDeselectAll());
 
   return (
     <View style={home.style}>
       <ExpensesList
         style={home}
         data={expenses}
-        editItem={editItem}
-        toggleDeleteModal={toggleDeleteModal}
-        updateArray={updateArray}
-        deleteMultiple={deleteMultiple}
-        showCheckBox={showCheckBox}
+        editItem={goToEditPage}
+        showCheckBox={showExpensesCheckBox}
         toggleCheckBox={toggleCheckBox}
+        toggleExpenseCheckbox={toggleExpenseCheckbox}
+        isSelectAll={isSelectAll}
+        toggleSelectAll={toggleSelectAll}
       />
-      <Button style={home.button} text="+" onPress={createItem} />
+      {showExpensesCheckBox ? (
+        <>
+          <Button
+            style={home.deleteButton}
+            text="Delete"
+            onPress={toggleDeleteModal}
+          />
+          <Button
+            style={home.cancelButton}
+            text="Cancel"
+            onPress={toggleCheckBox}
+          />
+        </>
+      ) : null}
+      <Button style={home.button} text="+" onPress={goToCreatePage} />
       <Modal
         isVisible={showModal}
         toggleDeleteModal={toggleDeleteModal}
-        delItem={delItem}
+        delItem={deleteExpenses}
       />
     </View>
   );
@@ -84,6 +90,17 @@ const home = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     bottom: 20,
+  },
+  deleteButton: {
+    position: 'absolute',
+    alignSelf: 'center',
+    backgroundColor: deleteButton,
+    bottom: 120,
+  },
+  cancelButton: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 70,
   },
   listStyle: {
     flex: 1,

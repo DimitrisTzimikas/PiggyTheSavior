@@ -4,14 +4,26 @@ export const REMOVE_EXP = 'REMOVE_EXPENSE';
 export const UPDATE_EXP = 'UPDATE_EXPENSE';
 export const CREATE_PRD = 'CREATE_PRODUCT';
 export const REMOVE_PRD = 'REMOVE_PRODUCT';
+export const SHOW_EXPENSES_CHECKBOXES = 'SHOW_EXPENSES_CHECKBOXES';
+export const SHOW_PRODUCTS_CHECKBOXES = 'SHOW_PRODUCTS_CHECKBOXES';
+export const IS_EXPENSE_SELECTED = 'IS_EXPENSE_SELECTED';
+export const IS_PRODUCT_SELECTED = 'IS_PRODUCT_SELECTED';
+export const SELECT_DESELECT_ALL_EXPENSES = 'SELECT_DESELECT_ALL_EXPENSES';
 
 const initialState = {
+  showExpensesCheckBox: false,
+  showProductsCheckBox: false,
+  isAllExpensesSelected: false,
+  isAllProductsSelected: false,
+  toggleExpensesSelectAllButton: false,
+  toggleProductsSelectAllButton: false,
   list: [
     {
       id: 'aswrwetddf',
       title: 'Weakly',
       budget: '100',
       remainder: 90,
+      isExpenseSelected: false,
       productsList: [
         {id: 'asdftgb', name: 'Gums', cost: '2'},
         {id: 'asd1234f', name: 'Coffee', cost: '2'},
@@ -23,6 +35,7 @@ const initialState = {
       title: 'Weakly',
       budget: '50',
       remainder: 41,
+      isExpenseSelected: false,
       productsList: [
         {id: 'asdjuikf', name: 'Gums', cost: '1'},
         {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
@@ -34,6 +47,7 @@ const initialState = {
       title: 'Weakly',
       budget: '100',
       remainder: 90,
+      isExpenseSelected: false,
       productsList: [
         {id: 'asdftgb', name: 'Gums', cost: '2'},
         {id: 'asd1234f', name: 'Coffee', cost: '2'},
@@ -45,6 +59,7 @@ const initialState = {
       title: 'Weakly',
       budget: '50',
       remainder: 41,
+      isExpenseSelected: false,
       productsList: [
         {id: 'asdjuikf', name: 'Gums', cost: '1'},
         {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
@@ -56,133 +71,13 @@ const initialState = {
       title: 'Weakly',
       budget: '100',
       remainder: 90,
+      isExpenseSelected: false,
       productsList: [
         {id: 'asdftgb', name: 'Gums', cost: '2'},
         {id: 'asd1234f', name: 'Coffee', cost: '2'},
         {id: '1asdf', name: 'Launch', cost: '6'},
       ],
     },
-    // {
-    //   id: 'a213421sdfg sdfvterdgvfsdf',
-    //   title: 'Weakly',
-    //   budget: '50',
-    //   remainder: 41,
-    //   productsList: [
-    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
-    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
-    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
-    // {
-    //   id: 'asdertyv456465v54tvefdgscsdfgf',
-    //   title: 'Weakly',
-    //   budget: '100',
-    //   remainder: 90,
-    //   productsList: [
-    //     {id: 'asdftgb', name: 'Gums', cost: '2'},
-    //     {id: 'asd1234f', name: 'Coffee', cost: '2'},
-    //     {id: '1asdf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
-    // {
-    //   id: 'a21342ertyverty1fsdf',
-    //   title: 'Weakly',
-    //   budget: '50',
-    //   remainder: 41,
-    //   productsList: [
-    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
-    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
-    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
-    // {
-    //   id: 'ajjgfhjtvysdf',
-    //   title: 'Weakly',
-    //   budget: '100',
-    //   remainder: 90,
-    //   productsList: [
-    //     {id: 'asdftgb', name: 'Gums', cost: '2'},
-    //     {id: 'asd1234f', name: 'Coffee', cost: '2'},
-    //     {id: '1asdf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
-    // {
-    //   id: 'a21dfgfdffggg3421fsdf',
-    //   title: 'Weakly',
-    //   budget: '50',
-    //   remainder: 41,
-    //   productsList: [
-    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
-    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
-    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
-    // {
-    //   id: 'a342rwerrrrsdf',
-    //   title: 'Weakly',
-    //   budget: '100',
-    //   remainder: 90,
-    //   productsList: [
-    //     {id: 'asdftgb', name: 'Gums', cost: '2'},
-    //     {id: 'asd1234f', name: 'Coffee', cost: '2'},
-    //     {id: '1asdf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
-    // {
-    //   id: 'a2134erwtcetc4321fsdf',
-    //   title: 'Weakly',
-    //   budget: '50',
-    //   remainder: 41,
-    //   productsList: [
-    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
-    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
-    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
-    // {
-    //   id: 'asdfgcewrtc43df',
-    //   title: 'Weakly',
-    //   budget: '100',
-    //   remainder: 90,
-    //   productsList: [
-    //     {id: 'asdftgb', name: 'Gums', cost: '2'},
-    //     {id: 'asd1234f', name: 'Coffee', cost: '2'},
-    //     {id: '1asdf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
-    // {
-    //   id: 'a213421fsdf',
-    //   title: 'Weakly',
-    //   budget: '50',
-    //   remainder: 41,
-    //   productsList: [
-    //     {id: 'asdjuikf', name: 'Gums', cost: '1'},
-    //     {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
-    //     {id: 'asqwerfadf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
-    // {
-    //   id: 'asdfc234r234cr',
-    //   title: 'Weakly',
-    //   budget: '100',
-    //   remainder: 90,
-    //   productsList: [
-    //     {id: 'asd234cr342crftgb', name: 'Gums', cost: '2'},
-    //     {id: 'asd12c234r34f', name: 'Coffee', cost: '2'},
-    //     {id: '1a23c4r423rcsdf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
-    // {
-    //   id: 'a213421sdfvr43rc34fsdf',
-    //   title: 'Weakly',
-    //   budget: '50',
-    //   remainder: 41,
-    //   productsList: [
-    //     {id: 'sdfvasdjuikf', name: 'Gums', cost: '1'},
-    //     {id: 'aw45tfsdsdfvf', name: 'Coffee', cost: '2'},
-    //     {id: 'asqwevfdsrfadf', name: 'Launch', cost: '6'},
-    //   ],
-    // },
   ],
 };
 
@@ -210,7 +105,64 @@ export default (state = initialState, {type, payload}) => {
     case UPDATE_EXP:
       return {...state, list: [...updateHelper(state, payload)]};
     case REMOVE_EXP:
-      return {...state, list: deleteHelper(state, payload)};
+      return {
+        ...state,
+        showExpensesCheckBox: !state.showExpensesCheckBox,
+        toggleExpensesSelectAllButton: !state.showExpensesCheckBox,
+        list: [...deleteHelper(state, REMOVE_EXP)],
+      };
+    case SHOW_EXPENSES_CHECKBOXES:
+      return {
+        ...state,
+        showExpensesCheckBox: !state.showExpensesCheckBox,
+        toggleExpensesSelectAllButton: !state.showExpensesCheckBox,
+        list: [
+          ...state.list.map(expense => {
+            if (state.showExpensesCheckBox) {
+              return {...expense, isExpenseSelected: false};
+            } else {
+              if (expense.id === payload) {
+                return {
+                  ...expense,
+                  isExpenseSelected: !expense.isExpenseSelected,
+                };
+              }
+              return expense;
+            }
+          }),
+        ],
+      };
+    case SHOW_PRODUCTS_CHECKBOXES:
+      return {...state, showProductsCheckBox: !state.showProductsCheckBox};
+    case IS_EXPENSE_SELECTED:
+      return {
+        ...state,
+        list: [
+          ...state.list.map(expense => {
+            if (expense.id === payload) {
+              return {
+                ...expense,
+                isExpenseSelected: !expense.isExpenseSelected,
+              };
+            }
+            return expense;
+          }),
+        ],
+      };
+    case SELECT_DESELECT_ALL_EXPENSES:
+      return {
+        ...state,
+        toggleExpensesSelectAllButton: !state.toggleExpensesSelectAllButton,
+        list: [
+          ...state.list.map(expense => {
+            if (state.toggleExpensesSelectAllButton) {
+              return {...expense, isExpenseSelected: true};
+            } else {
+              return {...expense, isExpenseSelected: false};
+            }
+          }),
+        ],
+      };
     default:
       return state;
   }
@@ -221,7 +173,6 @@ export const createProduct = (expID, prdID) => ({
   type: CREATE_PRD,
   payload: {expID, prdID},
 });
-
 export const removeProduct = (expID, prdID) => ({
   type: REMOVE_PRD,
   payload: {expID, prdID},
@@ -231,16 +182,22 @@ export const createExpense = id => ({
   type: CREATE_EXP,
   payload: id,
 });
-
 export const updateExpense = (key, value, expID, prdID = '') => ({
   type: UPDATE_EXP,
   payload: {key, value, expID, prdID},
 });
+export const removeExpense = () => ({type: REMOVE_EXP});
 
-export const removeExpense = id => ({
-  type: REMOVE_EXP,
+export const showExpensesCheckboxes = id => ({
+  type: SHOW_EXPENSES_CHECKBOXES,
   payload: id,
 });
+export const showProductsCheckboxes = () => ({type: SHOW_PRODUCTS_CHECKBOXES});
+export const isExpenseSelected = id => ({
+  type: IS_EXPENSE_SELECTED,
+  payload: id,
+});
+export const selectDeselectAll = () => ({type: SELECT_DESELECT_ALL_EXPENSES});
 
 /* Helpers */
 const createProductHelper = (state, payload) => {
@@ -353,8 +310,13 @@ const updateHelper = (state, payload) => {
   return newExpensesList;
 };
 
-const deleteHelper = (state, id) => {
-  const deletedList = state.list.filter(item => item.id !== id);
+const deleteHelper = (state, type) => {
+  let deletedList;
+  if (type === REMOVE_EXP) {
+    deletedList = state.list.filter(
+      expense => expense.isExpenseSelected === false,
+    );
+  }
   return deletedList;
 };
 

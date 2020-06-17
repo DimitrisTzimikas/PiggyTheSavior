@@ -1,5 +1,5 @@
 /* Libraries */
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, TouchableOpacity, StyleSheet, View} from 'react-native';
 import TextTicker from 'react-native-text-ticker';
 import CheckBox from '@react-native-community/checkbox';
@@ -8,43 +8,44 @@ import {second} from '../../styles/colors.js';
 import {decimal} from '../../functions/decimal.js';
 import {euro} from '../../styles/signs.js';
 
-export default ({item, onPress, showCheckBox, updateArray}) => {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const onValueChange = () => {
-    updateArray(item.id, !toggleCheckBox);
-    setToggleCheckBox(!toggleCheckBox);
-  };
-
-  return (
-    <TouchableOpacity activeOpacity={1} style={list.button} onPress={onPress}>
-      {showCheckBox ? (
-        <CheckBox
-          style={list.checkBox}
-          value={toggleCheckBox}
-          onValueChange={onValueChange}
-        />
-      ) : null}
-      <View style={list.view}>
-        <TextTicker
-          style={list.text}
-          duration={4000}
-          loop
-          repeatSpacer={50}
-          marqueeDelay={3000}>
-          {item.title}
-        </TextTicker>
-      </View>
-      <Text style={list.budget}>
-        {decimal(item.budget)}
-        {euro}
-      </Text>
-      <Text style={list.remainder}>
-        {decimal(item.remainder)}
-        {euro}
-      </Text>
-    </TouchableOpacity>
-  );
-};
+export default ({
+  item,
+  onPress,
+  onLongPress,
+  showCheckBox,
+  toggleExpenseCheckbox,
+}) => (
+  <TouchableOpacity
+    style={list.button}
+    onPress={onPress}
+    onLongPress={onLongPress}>
+    {showCheckBox ? (
+      <CheckBox
+        style={list.checkBox}
+        value={item.isExpenseSelected}
+        onValueChange={toggleExpenseCheckbox}
+      />
+    ) : null}
+    <View style={list.view}>
+      <TextTicker
+        style={list.text}
+        duration={4000}
+        loop
+        repeatSpacer={50}
+        marqueeDelay={3000}>
+        {item.title}
+      </TextTicker>
+    </View>
+    <Text style={list.budget}>
+      {decimal(item.budget)}
+      {euro}
+    </Text>
+    <Text style={list.remainder}>
+      {decimal(item.remainder)}
+      {euro}
+    </Text>
+  </TouchableOpacity>
+);
 
 const list = StyleSheet.create({
   button: {
@@ -79,6 +80,5 @@ const list = StyleSheet.create({
   },
   checkBox: {
     height: 50,
-    width: 50,
   },
 });
