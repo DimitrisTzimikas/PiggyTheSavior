@@ -8,6 +8,7 @@ import {modalButton} from '../../styles/colors.js';
 
 export default ({isVisible, toggleDeleteModal, delItem}) => (
   <Modal
+    statusBarTranslucent
     isVisible={isVisible}
     onBackdropPress={toggleDeleteModal}
     backdropColor={modalButton}
