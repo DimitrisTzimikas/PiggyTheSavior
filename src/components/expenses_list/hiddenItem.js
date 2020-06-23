@@ -2,16 +2,13 @@
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet, View} from 'react-native';
 
-export default ({deleteItem, selectMultiple, deleteMultiple}) => (
+export default ({deleteItem, toggleCheckBox}) => (
   <View style={hidden.container}>
-    <TouchableOpacity style={hidden.rightButton} onPress={deleteItem}>
+    <TouchableOpacity style={hidden.rightButton1} onPress={deleteItem}>
       <Text style={hidden.text}>Delete</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={hidden.leftFirstButton} onPress={selectMultiple}>
-      <Text style={hidden.text}>Select Multiple</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={hidden.leftSecondButton} onPress={deleteMultiple}>
-      <Text style={hidden.text}>Delete</Text>
+    <TouchableOpacity style={hidden.rightButton2} onPress={toggleCheckBox}>
+      <Text style={hidden.text}>Multiple</Text>
     </TouchableOpacity>
   </View>
 );
@@ -24,7 +21,7 @@ const hidden = StyleSheet.create({
     margin: 6,
     height: 50,
   },
-  rightButton: {
+  rightButton1: {
     alignItems: 'center',
     bottom: 0,
     justifyContent: 'center',
@@ -36,7 +33,7 @@ const hidden = StyleSheet.create({
     padding: 10,
     width: 80,
   },
-  leftFirstButton: {
+  rightButton2: {
     alignItems: 'center',
     bottom: 0,
     justifyContent: 'center',
@@ -44,19 +41,8 @@ const hidden = StyleSheet.create({
     borderRadius: 5,
     top: 0,
     backgroundColor: 'blue',
-    left: 0,
-    width: 120,
-  },
-  leftSecondButton: {
-    alignItems: 'center',
-    bottom: 0,
-    justifyContent: 'center',
-    position: 'absolute',
-    borderRadius: 5,
-    top: 0,
-    left: 121,
-    width: 80,
-    backgroundColor: 'red',
+    right: 82,
+    padding: 10,
   },
   text: {
     color: 'white',

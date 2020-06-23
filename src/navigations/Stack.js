@@ -14,8 +14,8 @@ const Stack = createStackNavigator();
 export default () => (
   <Stack.Navigator
     initialRouteName={home}
+    headerMode="none"
     screenOptions={{
-      headerShown: false,
       gestureEnabled: true,
       gestureDirection: 'horizontal',
       cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

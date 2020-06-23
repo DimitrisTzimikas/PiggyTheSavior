@@ -9,7 +9,7 @@ import Button from '../components/button.js';
 import ExpensesList from '../components/expenses_list/flatList.js';
 import Modal from '../components/modals/delete.js';
 import {products} from '../navigations/screen_names.js';
-import {deleteButton} from '../styles/colors.js';
+import colors from '../styles/colors.js';
 import {
   createExpense,
   removeExpense,
@@ -75,8 +75,8 @@ export default ({navigation}) => {
       <Button style={home.button} text="+" onPress={goToCreatePage} />
       <Modal
         isVisible={showModal}
-        toggleDeleteModal={toggleDeleteModal}
-        delItem={deleteExpenses}
+        onBackdropPress={toggleDeleteModal}
+        onPress={deleteExpenses}
       />
     </View>
   );
@@ -94,7 +94,7 @@ const home = StyleSheet.create({
   deleteButton: {
     position: 'absolute',
     alignSelf: 'center',
-    backgroundColor: deleteButton,
+    backgroundColor: colors.deleteButton,
     bottom: 120,
   },
   cancelButton: {

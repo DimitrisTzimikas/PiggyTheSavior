@@ -4,7 +4,7 @@ import {Text, TouchableOpacity, StyleSheet, View} from 'react-native';
 import TextTicker from 'react-native-text-ticker';
 import CheckBox from '@react-native-community/checkbox';
 /* Local Files */
-import {second} from '../../styles/colors.js';
+import colors from '../../styles/colors.js';
 import {decimal} from '../../functions/decimal.js';
 import {euro} from '../../styles/signs.js';
 
@@ -51,7 +51,7 @@ const list = StyleSheet.create({
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: second,
+    backgroundColor: colors.second,
     borderRadius: 5,
     margin: 6,
     height: 50,

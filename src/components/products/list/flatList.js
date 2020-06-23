@@ -13,7 +13,6 @@ export default ({
   toggleProduct,
   toggleDeleteModal,
   updateArray,
-  deleteMultiple,
   showCheckBox,
   toggleCheckBox,
 }) => (
@@ -36,12 +35,10 @@ export default ({
     renderHiddenItem={({item}) => (
       <HiddenItem
         deleteItem={() => toggleDeleteModal(item.id)}
-        selectMultiple={toggleCheckBox}
-        deleteMultiple={deleteMultiple}
+        toggleCheckBox={toggleCheckBox}
       />
     )}
     ListFooterComponent={() => <View style={style.footer} />}
-    leftOpenValue={202}
-    rightOpenValue={-82}
+    rightOpenValue={-165}
   />
 );

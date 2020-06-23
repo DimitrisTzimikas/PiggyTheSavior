@@ -4,7 +4,7 @@ import {Text, TextInput, View, StyleSheet} from 'react-native';
 import Modal from 'react-native-modal';
 /* Local Files */
 import Button from '../../components/button.js';
-import {modalButton} from '../../styles/colors.js';
+import colors from '../../styles/colors.js';
 import {euro} from '../../styles/signs.js';
 export default ({
   isVisible,
@@ -16,7 +16,7 @@ export default ({
   <Modal
     isVisible={isVisible}
     onBackdropPress={() => toggle('', false)}
-    backdropColor={modalButton}
+    backdropColor={colors.modalButton}
     backdropOpacity={0.8}
     hideModalContentWhileAnimating={true}
     useNativeDriver={true}>

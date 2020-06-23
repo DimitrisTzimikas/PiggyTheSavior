@@ -5,7 +5,7 @@ import TextTicker from 'react-native-text-ticker';
 import CheckBox from '@react-native-community/checkbox';
 /* Local Files */
 import {euro} from '../../../styles/signs.js';
-import {second} from '../../../styles/colors.js';
+import colors from '../../../styles/colors.js';
 
 export default ({item, onPress, showCheckBox, updateArray}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -19,16 +19,6 @@ export default ({item, onPress, showCheckBox, updateArray}) => {
       style={list.container}
       activeOpacity={1}
       onPress={onPress}>
-      {showCheckBox ? (
-        <CheckBox
-          style={list.checkBox}
-          value={toggleCheckBox}
-          onValueChange={onValueChange}
-        />
-      ) : null}
-      {/* <Text style={list.text} numberOfLines={1}>
-        {item.name}
-      </Text> */}
       <View style={list.view}>
         <TextTicker
           style={list.text}
@@ -42,6 +32,13 @@ export default ({item, onPress, showCheckBox, updateArray}) => {
       <Text style={list.cost}>
         {item.cost} {euro}
       </Text>
+      {showCheckBox ? (
+        <CheckBox
+          style={list.checkBox}
+          value={toggleCheckBox}
+          onValueChange={onValueChange}
+        />
+      ) : null}
     </TouchableOpacity>
   );
 };
@@ -50,7 +47,7 @@ const list = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: second,
+    backgroundColor: colors.second,
     borderRadius: 5,
     margin: 6,
     height: 50,

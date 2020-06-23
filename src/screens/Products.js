@@ -16,10 +16,10 @@ import {
   removeProduct,
 } from '../redux/ducks/expenses.js';
 
-export default ({navigation, route}) => {
+export default ({navigation, route: {params}}) => {
   const dispatch = useDispatch();
   const expense = useSelector(state =>
-    state.expenses.list.find(i => i.id === route.params.id),
+    state.expenses.list.find(i => i.id === params.id),
   );
   const [showProductModal, setShowProductModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -27,50 +27,50 @@ export default ({navigation, route}) => {
   const [array, setArray] = useState([]);
   const [showCheckBox, setShowCheckbox] = useState(false);
 
-  const changeTitle = text =>
-    dispatch(updateExpense('title', text, route.params.id));
+  const changeTitle = text => dispatch(updateExpense('title', text, params.id));
+
   const changeBudget = text =>
-    dispatch(updateExpense('budget', text, route.params.id));
+    dispatch(updateExpense('budget', text, params.id));
+
   const changeProductName = text =>
-    dispatch(updateExpense('name', text, route.params.id, productID));
+    dispatch(updateExpense('name', text, params.id, productID));
+
   const changeProductCost = text =>
-    dispatch(updateExpense('cost', text, route.params.id, productID));
+    dispatch(updateExpense('cost', text, params.id, productID));
+
   const toggleProductModal = (id, createProductItem) => {
     if (createProductItem) {
       const prdID = uuidv4();
-      dispatch(createProduct(route.params.id, prdID));
+      dispatch(createProduct(params.id, prdID));
       setProductID(prdID);
     } else {
       setProductID(id);
     }
     setShowProductModal(!showProductModal);
   };
+
   const toggleDeleteModal = id => {
     if (typeof id === 'string') {
       setProductID(id);
     }
     setShowDeleteModal(!showDeleteModal);
   };
-  const delProduct = () => {
-    if (productID === 'multiple') {
-      array.forEach(id => {
-        dispatch(removeProduct(route.params.id, id));
-      });
-      toggleCheckBox();
+
+  const deleteProducts = () => {
+    if (showCheckBox) {
+      array.forEach(id => dispatch(removeProduct(params.id, id)));
     } else {
-      dispatch(removeProduct(route.params.id, productID));
+      dispatch(removeProduct(params.id, productID));
     }
     setShowDeleteModal(!showDeleteModal);
   };
+
   const updateArray = (id, add) => {
     if (add) {
       setArray([...array, id]);
     } else {
       setArray([...array.filter(i => i !== id)]);
     }
-  };
-  const deleteMultiple = () => {
-    toggleDeleteModal('multiple');
   };
   const backButton = () => navigation.popToTop();
   const toggleCheckBox = () => setShowCheckbox(!showCheckBox);
@@ -88,7 +88,6 @@ export default ({navigation, route}) => {
         toggleProduct={toggleProductModal}
         toggleDeleteModal={toggleDeleteModal}
         updateArray={updateArray}
-        deleteMultiple={deleteMultiple}
         showCheckBox={showCheckBox}
         toggleCheckBox={toggleCheckBox}
       />
@@ -102,8 +101,8 @@ export default ({navigation, route}) => {
       />
       <DeleteModal
         isVisible={showDeleteModal}
-        toggleDeleteModal={toggleDeleteModal}
-        delItem={delProduct}
+        onBackdropPress={toggleDeleteModal}
+        onPress={deleteProducts}
       />
     </View>
   );

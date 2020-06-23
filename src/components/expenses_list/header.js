@@ -1,7 +1,7 @@
 /* Libraries */
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import {main} from '../../styles/colors.js';
+import colors from '../../styles/colors.js';
 
 export default ({length, showCheckBox, toggleSelectAll, isSelectAll}) => (
   <>
@@ -30,7 +30,7 @@ export default ({length, showCheckBox, toggleSelectAll, isSelectAll}) => (
 
 const list = StyleSheet.create({
   header: {
-    backgroundColor: main,
+    backgroundColor: colors.main,
     paddingHorizontal: 20,
     paddingVertical: 10,
     elevation: 5,

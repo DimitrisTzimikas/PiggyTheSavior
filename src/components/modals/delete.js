@@ -4,19 +4,20 @@ import {Text, View, StyleSheet} from 'react-native';
 import Modal from 'react-native-modal';
 /* Local Files */
 import Button from '../button.js';
-import {modalButton} from '../../styles/colors.js';
+import colors from '../../styles/colors.js';
 
-export default ({isVisible, toggleDeleteModal, delItem}) => (
+export default ({isVisible, onBackdropPress, onPress}) => (
   <Modal
+    statusBarTranslucent
     isVisible={isVisible}
-    onBackdropPress={toggleDeleteModal}
-    backdropColor={modalButton}
+    onBackdropPress={onBackdropPress}
+    backdropColor={colors.modalButton}
     backdropOpacity={0.8}
     hideModalContentWhileAnimating={true}
     useNativeDriver={true}>
     <View style={modal.style}>
       <Text style={modal.text}>{'Are you sure you want to delete item?'}</Text>
-      <Button text={'delete'} onPress={delItem} />
+      <Button text={'delete'} onPress={onPress} />
     </View>
   </Modal>
 );
