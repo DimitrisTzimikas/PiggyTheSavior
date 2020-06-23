@@ -9,7 +9,7 @@ import {reducers} from './ducks/index.js';
 const config = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: [''],
+  whitelist: ['expenses'],
   blacklist: [''],
 };
 const persistedReducer = persistReducer(config, reducers);
