@@ -98,6 +98,7 @@ export default (state = initialState, {type, payload}) => {
             title: '',
             budget: '',
             remainder: 0,
+            isExpenseSelected: false,
             productsList: [],
           },
         ],
@@ -313,9 +314,7 @@ const updateHelper = (state, payload) => {
 const deleteHelper = (state, type) => {
   let deletedList;
   if (type === REMOVE_EXP) {
-    deletedList = state.list.filter(
-      expense => expense.isExpenseSelected === false,
-    );
+    deletedList = state.list.filter(_ => _.isExpenseSelected === false);
   }
   return deletedList;
 };
