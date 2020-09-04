@@ -16,6 +16,7 @@ import {
   showExpensesCheckboxes,
   isExpenseSelected,
   selectDeselectAll,
+  hideExpensesCheckboxes,
 } from '../redux/ducks/expenses.js';
 
 export default ({navigation}) => {
@@ -34,17 +35,28 @@ export default ({navigation}) => {
     dispatch(createExpense(id));
     navigation.navigate(products, {id});
   };
-  const goToEditPage = id => navigation.navigate(products, {id});
+
   const deleteExpenses = () => {
     dispatch(removeExpense());
     setShowModal(!showModal);
   };
-  const toggleDeleteModal = () => setShowModal(!showModal);
-  const toggleCheckBox = expenseID =>
+
+  const toggleCheckBox = expenseID => {
     dispatch(showExpensesCheckboxes(expenseID));
-  const toggleExpenseCheckbox = expenseID =>
+  };
+
+  const toggleExpenseCheckbox = expenseID => {
     dispatch(isExpenseSelected(expenseID));
+  };
+
+  const hideCheckBox = () => {
+    dispatch(hideExpensesCheckboxes());
+  };
+
+  const toggleDeleteModal = () => setShowModal(!showModal);
   const toggleSelectAll = () => dispatch(selectDeselectAll());
+
+  const goToEditPage = id => navigation.navigate(products, {id});
 
   return (
     <View style={home.style}>
@@ -68,11 +80,12 @@ export default ({navigation}) => {
           <Button
             style={home.cancelButton}
             text="Cancel"
-            onPress={toggleCheckBox}
+            onPress={hideCheckBox}
           />
         </>
-      ) : null}
-      <Button style={home.button} text="+" onPress={goToCreatePage} />
+      ) : (
+        <Button style={home.button} text="+" onPress={goToCreatePage} />
+      )}
       <Modal
         isVisible={showModal}
         onBackdropPress={toggleDeleteModal}
@@ -95,12 +108,12 @@ const home = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     backgroundColor: colors.deleteButton,
-    bottom: 120,
+    bottom: 70,
   },
   cancelButton: {
     position: 'absolute',
     alignSelf: 'center',
-    bottom: 70,
+    bottom: 20,
   },
   listStyle: {
     flex: 1,

@@ -5,6 +5,7 @@ export const UPDATE_EXP = 'UPDATE_EXPENSE';
 export const CREATE_PRD = 'CREATE_PRODUCT';
 export const REMOVE_PRD = 'REMOVE_PRODUCT';
 export const SHOW_EXPENSES_CHECKBOXES = 'SHOW_EXPENSES_CHECKBOXES';
+export const HIDE_EXPENSES_CHECKBOXES = 'HIDE_EXPENSES_CHECKBOXES';
 export const SHOW_PRODUCTS_CHECKBOXES = 'SHOW_PRODUCTS_CHECKBOXES';
 export const IS_EXPENSE_SELECTED = 'IS_EXPENSE_SELECTED';
 export const IS_PRODUCT_SELECTED = 'IS_PRODUCT_SELECTED';
@@ -133,6 +134,16 @@ export default (state = initialState, {type, payload}) => {
           }),
         ],
       };
+    case HIDE_EXPENSES_CHECKBOXES:
+      return {
+        ...state,
+        showExpensesCheckBox: false,
+        list: [
+          ...state.list.map(expense => {
+            return {...expense, isExpenseSelected: false};
+          }),
+        ],
+      };
     case SHOW_PRODUCTS_CHECKBOXES:
       return {...state, showProductsCheckBox: !state.showProductsCheckBox};
     case IS_EXPENSE_SELECTED:
@@ -192,6 +203,9 @@ export const removeExpense = () => ({type: REMOVE_EXP});
 export const showExpensesCheckboxes = id => ({
   type: SHOW_EXPENSES_CHECKBOXES,
   payload: id,
+});
+export const hideExpensesCheckboxes = () => ({
+  type: HIDE_EXPENSES_CHECKBOXES,
 });
 export const showProductsCheckboxes = () => ({type: SHOW_PRODUCTS_CHECKBOXES});
 export const isExpenseSelected = id => ({
