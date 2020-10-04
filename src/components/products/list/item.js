@@ -6,6 +6,7 @@ import CheckBox from '@react-native-community/checkbox';
 /* Local Files */
 import {euro} from '../../../styles/signs.js';
 import colors from '../../../styles/colors.js';
+import today from '../../../utils/today.js';
 
 export default ({item, onPress, showCheckBox, updateArray}) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -28,6 +29,7 @@ export default ({item, onPress, showCheckBox, updateArray}) => {
           marqueeDelay={3000}>
           {item.name}
         </TextTicker>
+        <Text>{today}</Text>
       </View>
       <Text style={list.cost}>
         {item.cost} {euro}
