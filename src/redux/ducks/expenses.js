@@ -1,3 +1,4 @@
+import today from '../../utils/today';
 /*  Types */
 export const CREATE_EXP = 'CREATE_EXPENSE';
 export const REMOVE_EXP = 'REMOVE_EXPENSE';
@@ -26,9 +27,9 @@ const initialState = {
       remainder: 90,
       isExpenseSelected: false,
       productsList: [
-        {id: 'asdftgb', name: 'Gums', cost: '2'},
-        {id: 'asd1234f', name: 'Coffee', cost: '2'},
-        {id: '1asdf', name: 'Launch', cost: '6'},
+        {id: 'asdftgb', name: 'Gums', cost: '2', today: '01/01/2000'},
+        {id: 'asd1234f', name: 'Coffee', cost: '2', today: '01/01/2000'},
+        {id: '1asdf', name: 'Launch', cost: '6', today: '01/01/2000'},
       ],
     },
     {
@@ -38,9 +39,9 @@ const initialState = {
       remainder: 41,
       isExpenseSelected: false,
       productsList: [
-        {id: 'asdjuikf', name: 'Gums', cost: '1'},
-        {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
-        {id: 'asqwerfadf', name: 'Launch', cost: '6'},
+        {id: 'asdjuikf', name: 'Gums', cost: '1', today: '01/01/2000'},
+        {id: 'aw45tfsdf', name: 'Coffee', cost: '2', today: '01/01/2000'},
+        {id: 'asqwerfadf', name: 'Launch', cost: '6', today: '01/01/2000'},
       ],
     },
     {
@@ -50,9 +51,9 @@ const initialState = {
       remainder: 90,
       isExpenseSelected: false,
       productsList: [
-        {id: 'asdftgb', name: 'Gums', cost: '2'},
-        {id: 'asd1234f', name: 'Coffee', cost: '2'},
-        {id: '1asdf', name: 'Launch', cost: '6'},
+        {id: 'asdftgb', name: 'Gums', cost: '2', today: '01/01/2000'},
+        {id: 'asd1234f', name: 'Coffee', cost: '2', today: '01/01/2000'},
+        {id: '1asdf', name: 'Launch', cost: '6', today: '01/01/2000'},
       ],
     },
     {
@@ -62,9 +63,9 @@ const initialState = {
       remainder: 41,
       isExpenseSelected: false,
       productsList: [
-        {id: 'asdjuikf', name: 'Gums', cost: '1'},
-        {id: 'aw45tfsdf', name: 'Coffee', cost: '2'},
-        {id: 'asqwerfadf', name: 'Launch', cost: '6'},
+        {id: 'asdjuikf', name: 'Gums', cost: '1', today: '01/01/2000'},
+        {id: 'aw45tfsdf', name: 'Coffee', cost: '2', today: '01/01/2000'},
+        {id: 'asqwerfadf', name: 'Launch', cost: '6', today: '01/01/2000'},
       ],
     },
     {
@@ -74,9 +75,9 @@ const initialState = {
       remainder: 90,
       isExpenseSelected: false,
       productsList: [
-        {id: 'asdftgb', name: 'Gums', cost: '2'},
-        {id: 'asd1234f', name: 'Coffee', cost: '2'},
-        {id: '1asdf', name: 'Launch', cost: '6'},
+        {id: 'asdftgb', name: 'Gums', cost: '2', today: '01/01/2000'},
+        {id: 'asd1234f', name: 'Coffee', cost: '2', today: '01/01/2000'},
+        {id: '1asdf', name: 'Launch', cost: '6', today: '01/01/2000'},
       ],
     },
   ],
@@ -222,7 +223,7 @@ const createProductHelper = (state, payload) => {
         ...expense,
         productsList: [
           ...expense.productsList,
-          {id: payload.prdID, name: '', cost: ''},
+          {id: payload.prdID, name: '', cost: '', today: today},
         ],
       };
     }
